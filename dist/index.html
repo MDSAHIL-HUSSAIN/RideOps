@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#09162f" />
+  <title>RideOps · Escalation Readiness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="rail">
+      <div class="brand"><span class="brand-mark">R</span><span>RideOps</span></div>
+      <nav aria-label="Main navigation">
+        <button class="nav-item active" data-view="workbench"><span>◫</span>Workbench</button>
+        <button class="nav-item" data-view="queue"><span>≡</span>Ticket queue</button>
+        <button class="nav-item" data-view="insights"><span>⌁</span>Operations</button>
+      </nav>
+      <div class="rail-note">
+        <span class="eyebrow">Pilot scope</span>
+        <strong>Roster sync + GPS</strong>
+        <p>These two categories make up 62.5% of the current open backlog.</p>
+      </div>
+      <div class="user"><span class="avatar">PD</span><div><strong>Priya D</strong><small>L1 Support</small></div></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div><p class="eyebrow">Support operations</p><h1 id="page-title">Escalation workbench</h1></div>
+        <div class="top-actions">
+          <label class="global-search"><span>⌕</span><input id="global-search" placeholder="Find ticket, client or issue" /></label>
+          <button class="button secondary" id="reset-demo">Reset demo</button>
+          <button class="button primary" id="new-assessment">New assessment</button>
+        </div>
+      </header>
+
+      <section id="workbench-view" class="view active">
+        <div class="context-strip">
+          <div><span class="context-label">Working ticket</span><strong id="context-id">Select a ticket</strong></div>
+          <div><span class="context-label">Client</span><strong id="context-client">—</strong></div>
+          <div><span class="context-label">Priority</span><strong id="context-priority">—</strong></div>
+          <div><span class="context-label">Readiness</span><strong id="context-score">0%</strong></div>
+          <button class="text-button" id="open-queue">Change ticket</button>
+        </div>
+
+        <div class="workspace-grid">
+          <section class="card workflow-card">
+            <div class="stepper" role="tablist" aria-label="Assessment steps">
+              <button class="step active" data-step="intake"><span>1</span>Intake</button>
+              <button class="step" data-step="diagnosis"><span>2</span>Diagnose</button>
+              <button class="step" data-step="route"><span>3</span>Route</button>
+              <button class="step" data-step="packet"><span>4</span>Packet</button>
+              <button class="step" data-step="closure"><span>5</span>Verify</button>
+            </div>
+
+            <div id="step-intake" class="step-panel active">
+              <div class="panel-heading"><div><p class="eyebrow">Clarify the issue</p><h2>Ticket intake</h2></div><span class="save-state" id="save-state">Saved locally</span></div>
+              <div class="form-grid">
+                <label>Ticket ID<input id="ticket-id" readonly /></label>
+                <label>Client<input id="client-name" readonly /></label>
+                <label>Category<select id="category"></select></label>
+                <label>Priority<select id="priority"><option>P1</option><option>P2</option><option>P3</option><option>P4</option></select></label>
+                <label class="wide">What is happening?<textarea id="description" rows="3"></textarea></label>
+                <label class="wide">Expected vs actual behaviour<textarea id="expected-actual" rows="3" placeholder="Expected: …  Actual: …"></textarea></label>
+                <label>Employee / trip / shift ID<input id="entity-id" placeholder="e.g. TRP-48291" /></label>
+                <label>First observed at<input id="observed-at" type="datetime-local" /></label>
+                <label>Business impact<select id="impact"><option value="">Select impact</option><option>Single employee affected</option><option>Multiple employees affected</option><option>Entire shift / site affected</option><option>Safety or boarding blocked</option></select></label>
+                <label>Reproducibility<select id="reproducibility"><option value="">Select status</option><option>Reproduced consistently</option><option>Intermittent</option><option>Unable to reproduce</option></select></label>
+              </div>
+              <div class="panel-footer"><span>Complete the essential context before troubleshooting.</span><button class="button primary next-step" data-next="diagnosis">Continue to diagnosis</button></div>
+            </div>
+
+            <div id="step-diagnosis" class="step-panel">
+              <div class="panel-heading"><div><p class="eyebrow">Category-specific checks</p><h2 id="diagnosis-title">Guided diagnosis</h2></div><button class="button ghost" id="mark-all">Mark all checked</button></div>
+              <div class="diagnosis-layout">
+                <div id="checklist" class="checklist"></div>
+                <aside class="evidence-box">
+                  <h3>Evidence bundle</h3>
+                  <label>Screenshot / recording URL<input id="evidence-url" placeholder="Paste secure internal link" /></label>
+                  <label>Relevant IDs / logs<textarea id="log-notes" rows="5" placeholder="Trip ID, roster batch, device ID, timestamps…"></textarea></label>
+                  <label>Checks performed<textarea id="checks-notes" rows="5" placeholder="Add observations or failed checks"></textarea></label>
+                </aside>
+              </div>
+              <div class="panel-footer"><button class="button secondary back-step" data-back="intake">Back</button><button class="button primary next-step" data-next="route">Review route</button></div>
+            </div>
+
+            <div id="step-route" class="step-panel">
+              <div class="panel-heading"><div><p class="eyebrow">Evidence-based recommendation</p><h2>Choose the next owner</h2></div></div>
+              <div id="route-recommendation" class="recommendation"></div>
+              <div class="route-options" role="radiogroup" aria-label="Routing decision">
+                <label class="route-option"><input type="radio" name="route" value="l1" /><span><strong>Continue in L1</strong><small>Known check, config, or usage path</small></span></label>
+                <label class="route-option"><input type="radio" name="route" value="engineering" /><span><strong>Escalate to Engineering</strong><small>Evidence complete and product behaviour unresolved</small></span></label>
+                <label class="route-option"><input type="radio" name="route" value="known" /><span><strong>Link known issue</strong><small>Track an existing engineering incident</small></span></label>
+              </div>
+              <label id="override-wrap" class="override hidden">Override reason<textarea id="override-reason" rows="3" placeholder="Explain why you are escalating before the readiness threshold"></textarea></label>
+              <div class="panel-footer"><button class="button secondary back-step" data-back="diagnosis">Back</button><button class="button primary next-step" data-next="packet">Create action packet</button></div>
+            </div>
+
+            <div id="step-packet" class="step-panel">
+              <div class="panel-heading"><div><p class="eyebrow">Structured handoff</p><h2>Action packet</h2></div><button class="button ghost" id="copy-packet">Copy packet</button></div>
+              <div class="packet" id="packet-preview"></div>
+              <div class="panel-footer"><button class="button secondary back-step" data-back="route">Back</button><button class="button primary" id="submit-action">Record action</button></div>
+            </div>
+
+            <div id="step-closure" class="step-panel">
+              <div class="panel-heading"><div><p class="eyebrow">Prevent avoidable reopens</p><h2>Resolution verification</h2></div></div>
+              <div class="closure-grid">
+                <div class="checklist" id="closure-checklist"></div>
+                <aside class="evidence-box">
+                  <h3>Client confirmation</h3>
+                  <label>Resolution summary<textarea id="resolution-summary" rows="4" placeholder="What changed and why it resolves the issue"></textarea></label>
+                  <label>Client confirmation<select id="client-confirmation"><option value="">Select status</option><option>Confirmed resolved</option><option>Awaiting client verification</option><option>Client unavailable</option></select></label>
+                  <button class="button primary full" id="verify-close">Mark verified</button>
+                </aside>
+              </div>
+              <div class="panel-footer"><button class="button secondary back-step" data-back="packet">Back</button><span id="closure-status">Verification required before closure</span></div>
+            </div>
+          </section>
+
+          <aside class="side-stack">
+            <section class="card readiness-card">
+              <div class="score-ring" id="score-ring"><strong id="readiness-score">0</strong><span>ready</span></div>
+              <div><p class="eyebrow">Escalation readiness</p><h3 id="readiness-label">Needs context</h3><p id="readiness-help">Complete the essential ticket context.</p></div>
+            </section>
+            <section class="card evidence-card">
+              <div class="card-heading"><h3>Why this matters</h3><span class="source-pill">90-day data</span></div>
+              <div class="stat-pair"><strong>35.6%</strong><span>of escalations were returned to L1 for information or configuration.</span></div>
+              <div class="stat-pair"><strong>2.2×</strong><span>longer median resolution when a ticket had two or more handoffs.</span></div>
+              <p class="fineprint">Associations from 1,444 historical tickets; not proof of engineering-stage time.</p>
+            </section>
+            <section class="card timeline-card">
+              <div class="card-heading"><h3>Workflow trail</h3><button class="icon-button" id="clear-trail" title="Clear local trail">×</button></div>
+              <ol id="timeline" class="timeline"></ol>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section id="queue-view" class="view">
+        <div class="queue-toolbar card">
+          <div><p class="eyebrow">Historical data</p><h2>Ticket queue</h2></div>
+          <div class="filters"><input id="queue-search" placeholder="Search tickets" /><select id="queue-category"><option value="all">All categories</option></select><select id="queue-status"><option value="all">All statuses</option><option value="open">Open</option><option value="closed">Closed</option></select></div>
+        </div>
+        <div class="card table-card"><table><thead><tr><th>Ticket</th><th>Client</th><th>Issue</th><th>Priority</th><th>Engineering</th><th>Handoffs</th><th>Status</th><th></th></tr></thead><tbody id="ticket-table"></tbody></table><div id="table-empty" class="empty hidden">No tickets match these filters.</div></div>
+      </section>
+
+      <section id="insights-view" class="view">
+        <div class="insight-hero"><div><p class="eyebrow">Pilot measurement</p><h2>Move backlog by improving first-time routing</h2><p>Track product behaviour and backlog health together. This separates a helpful workflow from a cosmetic process change.</p></div><span class="date-chip">Data through 30 Sep 2026</span></div>
+        <div class="metric-grid" id="metric-grid"></div>
+        <div class="insights-grid">
+          <section class="card"><div class="card-heading"><div><p class="eyebrow">Product funnel</p><h3>What the pilot should change</h3></div></div><div id="funnel" class="funnel"></div></section>
+          <section class="card"><div class="card-heading"><div><p class="eyebrow">Weekly review</p><h3>Success scorecard</h3></div></div><div class="scorecard"><div><span>Net backlog change</span><strong>Negative</strong><small>created − finally closed</small></div><div><span>Returned-to-L1 rate</span><strong>&lt; 25%</strong><small>baseline 35.6%</small></div><div><span>2+ handoff rate</span><strong>&lt; 35%</strong><small>baseline 47.1%</small></div><div><span>Reopen guardrail</span><strong>≤ 10.8%</strong><small>must not deteriorate</small></div></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
