@@ -30,7 +30,7 @@ export async function POST(request:Request){
   try{
     const model=(env as unknown as {GEMINI_MODEL?:string}).GEMINI_MODEL||"gemini-3.8-flash";
     const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),25000);
+    const timeout=setTimeout(()=>controller.abort(),60000);
     const prompt=[
       "You are RideOps Support Copilot.",
       "Use only the supplied ticket, evidence, deterministic findings and similar cases.",
@@ -39,11 +39,19 @@ export async function POST(request:Request){
       "Keep routing human-approved. Do not contradict deterministic safety checks.",
       JSON.stringify({request:parsed.data,deterministicFindings:fallback}),
     ].join("\n\n");
-    const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,{method:"POST",signal:controller.signal,headers:{"x-goog-api-key":apiKey,"Content-Type":"application/json"},body:JSON.stringify({
+    const requestBody=JSON.stringify({
       contents:[{role:"user",parts:[{text:prompt}]}],
-      generationConfig:{responseMimeType:"application/json",temperature:0.15,maxOutputTokens:2400},
-    })}).finally(()=>clearTimeout(timeout));
-    if(!response.ok)throw new Error(`Gemini request failed: ${response.status}`);
+      generationConfig:{responseMimeType:"application/json",temperature:0.15,maxOutputTokens:1800},
+    });
+    let response:Response|undefined;
+    for(let attempt=0;attempt<2;attempt+=1){
+      response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,{method:"POST",signal:controller.signal,headers:{"x-goog-api-key":apiKey,"Content-Type":"application/json"},body:requestBody});
+      if(response.ok)break;
+      if(![429,500,502,503,504].includes(response.status)||attempt===1)throw new Error(`Gemini request failed: ${response.status}`);
+      await new Promise(resolve=>setTimeout(resolve,900));
+    }
+    clearTimeout(timeout);
+    if(!response?.ok)throw new Error("Gemini request failed without a response");
     const raw=await response.json();
     const text=outputText(raw);
     if(!text)throw new Error("Gemini returned no usable text");
