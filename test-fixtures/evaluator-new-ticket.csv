@@ -1,0 +1,2 @@
+ticket_id,created_at,client_name,client_tier,category,priority,description,assigned_agent,escalated_to_eng,eng_handoffs,eng_outcome,status,reopen_count,csat_score
+SUP-NEW-001,2026-10-01 09:30,Evaluator Client,Enterprise,Live tracking / GPS incorrect,P2,"Vehicle marker is frozen, but the driver is moving",Test Agent,No,0,,Open - with L1,0,

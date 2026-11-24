@@ -18,5 +18,5 @@ const tickets=parseCsv(fs.readFileSync(source,"utf8")).map(t=>({
   csat:t.csat_score===""?null:Number(t.csat_score)
 }));
 fs.mkdirSync(path.dirname(output),{recursive:true});
-fs.writeFileSync(output,`import type { Ticket } from "./types";\nexport const historicalTickets: Ticket[] = ${JSON.stringify(tickets)};\n`);
+fs.writeFileSync(output,`import type { Ticket } from "./support-types";\nexport const historicalTickets: Ticket[] = ${JSON.stringify(tickets)};\n`);
 console.log(`Prepared ${tickets.length} historical tickets.`);

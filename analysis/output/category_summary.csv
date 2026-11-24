@@ -1,0 +1,11 @@
+﻿category,tickets,closed,open,open_rate,escalated,escalation_rate,median_resolution_hours,p75_resolution_hours,p90_resolution_hours,resolved_within_24h_rate,resolved_within_72h_rate,resolved_within_7d_rate,median_first_response_hours,p90_first_response_hours,reopened_tickets,reopen_rate,mean_csat,csat_responses,open_share
+Roster / booking not syncing,344,327,17,0.0494,175,0.5087,44.48,94.21,139.22,0.315,0.6575,0.9419,2.42,9.2,51,0.1545,3.42,153,0.3542
+Live tracking / GPS incorrect,228,215,13,0.057,127,0.557,42.73,116.37,182.7,0.3581,0.6186,0.8884,2.73,12.61,35,0.162,3.32,105,0.2708
+Report export failing,206,201,5,0.0243,77,0.3738,23.87,61.3,102.2,0.5025,0.801,0.9602,2.5,10.24,21,0.104,3.75,83,0.1042
+OTP / boarding issue,95,92,3,0.0316,34,0.3579,18.5,64.51,114.17,0.5652,0.7717,0.9565,2.42,12.12,11,0.1183,3.68,44,0.0625
+Billing / invoice discrepancy,88,85,3,0.0341,26,0.2955,39.62,77.2,121.27,0.2706,0.7412,0.9529,3.08,12.74,7,0.0824,3.62,37,0.0625
+Cab delay / no-show complaint,147,145,2,0.0136,14,0.0952,10.75,19.27,39.37,0.8,0.9379,0.9931,2.62,11.71,9,0.0621,4.19,74,0.0417
+Employee address / geocode change,75,73,2,0.0267,11,0.1467,17.93,28.5,64.68,0.6301,0.9041,0.9863,3.52,13.56,9,0.1233,3.85,40,0.0417
+Driver / vehicle compliance docs,57,55,2,0.0351,2,0.0351,20.3,38.63,54.62,0.5818,0.9455,1.0,2.12,11.32,4,0.0727,4.08,26,0.0417
+Login / access issue,100,99,1,0.01,8,0.08,7.62,13.06,24.96,0.8687,0.9798,0.9899,2.73,12.4,2,0.0202,4.07,45,0.0208
+How-to / feature request,104,104,0,0.0,12,0.1154,8.97,15.27,49.31,0.8173,0.9327,0.9904,1.66,9.97,2,0.0192,4.1,41,0.0

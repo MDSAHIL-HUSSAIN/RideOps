@@ -1,0 +1,7 @@
+﻿eng_outcome,tickets,closed,open,open_rate,escalated,escalation_rate,median_resolution_hours,p75_resolution_hours,p90_resolution_hours,resolved_within_24h_rate,resolved_within_72h_rate,resolved_within_7d_rate,median_first_response_hours,p90_first_response_hours,reopened_tickets,reopen_rate,mean_csat,csat_responses,open_share
+Fixed,211,199,12,0.0569,211,1.0,64.83,98.09,147.88,0.0402,0.5829,0.9397,2.41,11.64,22,0.11,3.41,94,0.3529
+Insufficient info - returned to L1,89,79,10,0.1124,89,1.0,121.12,178.03,229.31,0.0,0.1139,0.6835,2.8,11.26,10,0.125,2.66,41,0.2941
+Config issue - returned to L1,84,76,8,0.0952,84,1.0,128.57,172.69,216.39,0.0,0.0789,0.7105,2.19,7.79,12,0.1558,2.43,35,0.2353
+Duplicate of known issue,56,54,2,0.0357,56,1.0,67.49,101.92,140.5,0.0556,0.537,0.9444,2.83,11.47,4,0.0741,3.47,30,0.0588
+Not a bug - how-to,24,23,1,0.0417,24,1.0,68.67,100.32,133.36,0.0,0.5652,1.0,3.22,7.38,3,0.1304,3.2,10,0.0294
+Not reproducible,22,21,1,0.0455,22,1.0,62.3,92.33,124.08,0.0,0.619,1.0,3.14,13.55,4,0.1905,3.4,10,0.0294

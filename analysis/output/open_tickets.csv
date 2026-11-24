@@ -1,0 +1,49 @@
+﻿ticket_id,status,priority,category,escalated_to_eng,eng_handoffs,eng_outcome,age_hours,age_days
+SUP-11258,Open - with Engineering,P1,Live tracking / GPS incorrect,Yes,3,Config issue - returned to L1,222.65,9.28
+SUP-11267,Open - with L1,P2,OTP / boarding issue,Yes,1,Fixed,214.27,8.93
+SUP-11278,Open - with Engineering,P2,Roster / booking not syncing,Yes,2,Config issue - returned to L1,195.83,8.16
+SUP-11291,Open - with L1,P3,Roster / booking not syncing,Yes,3,Config issue - returned to L1,184.22,7.68
+SUP-11296,Open - with Engineering,P3,Live tracking / GPS incorrect,Yes,3,Insufficient info - returned to L1,175.95,7.33
+SUP-11335,Open - with L1,P4,Report export failing,Yes,2,Config issue - returned to L1,131.47,5.48
+SUP-11340,Open - with Engineering,P4,Live tracking / GPS incorrect,Yes,2,Fixed,128.88,5.37
+SUP-11343,Open - with L1,P4,Live tracking / GPS incorrect,Yes,2,Insufficient info - returned to L1,125.8,5.24
+SUP-11348,Open - with Engineering,P4,Live tracking / GPS incorrect,Yes,2,Fixed,114.37,4.77
+SUP-11354,Open - with L1,P4,Roster / booking not syncing,Yes,2,Config issue - returned to L1,101.13,4.21
+SUP-11357,Open - with Engineering,P3,Roster / booking not syncing,Yes,2,Config issue - returned to L1,99.42,4.14
+SUP-11359,Open - with L1,P3,Billing / invoice discrepancy,No,0,,97.98,4.08
+SUP-11363,Open - with L1,P4,OTP / boarding issue,Yes,1,Not reproducible,89.28,3.72
+SUP-11364,Open - with Engineering,P3,Live tracking / GPS incorrect,Yes,2,Config issue - returned to L1,86.72,3.61
+SUP-11366,Open - with Engineering,P2,Roster / booking not syncing,Yes,2,Fixed,85.0,3.54
+SUP-11371,Open - with Engineering,P3,Live tracking / GPS incorrect,Yes,3,Insufficient info - returned to L1,72.58,3.02
+SUP-11375,Open - with L1,P4,Live tracking / GPS incorrect,Yes,1,Fixed,69.33,2.89
+SUP-11377,Open - with Engineering,P3,OTP / boarding issue,Yes,1,Fixed,68.07,2.84
+SUP-11379,Open - with Engineering,P2,Roster / booking not syncing,Yes,2,Duplicate of known issue,67.55,2.81
+SUP-11380,Open - with L1,P4,Roster / booking not syncing,Yes,3,Insufficient info - returned to L1,66.73,2.78
+SUP-11386,Open - with Engineering,P3,Report export failing,Yes,1,Duplicate of known issue,60.4,2.52
+SUP-11389,Open - with L1,P4,Roster / booking not syncing,Yes,3,Config issue - returned to L1,55.95,2.33
+SUP-11391,Open - with Engineering,P4,Live tracking / GPS incorrect,Yes,3,Insufficient info - returned to L1,55.1,2.3
+SUP-11396,Open - with L1,P4,Cab delay / no-show complaint,Yes,1,Fixed,52.03,2.17
+SUP-11398,Open - with Engineering,P3,Roster / booking not syncing,Yes,2,Insufficient info - returned to L1,51.28,2.14
+SUP-11402,Open - with Engineering,P3,Roster / booking not syncing,Yes,3,Insufficient info - returned to L1,47.18,1.97
+SUP-11412,Open - with L1,P4,Report export failing,No,0,,38.03,1.58
+SUP-11416,Open - with L1,P3,Report export failing,No,0,,33.8,1.41
+SUP-11417,Open - with L1,P3,Billing / invoice discrepancy,Yes,2,Insufficient info - returned to L1,33.72,1.4
+SUP-11421,Open - with L1,P4,Roster / booking not syncing,No,0,,29.87,1.24
+SUP-11422,Open - with L1,P4,Roster / booking not syncing,No,0,,28.2,1.17
+SUP-11423,Open - with Engineering,P1,Live tracking / GPS incorrect,Yes,1,Fixed,23.3,0.97
+SUP-11424,Open - with L1,P4,Roster / booking not syncing,No,0,,21.38,0.89
+SUP-11426,Open - with Engineering,P1,Roster / booking not syncing,Yes,1,Fixed,19.62,0.82
+SUP-11427,Open - with Engineering,P3,Driver / vehicle compliance docs,Yes,2,Insufficient info - returned to L1,19.27,0.8
+SUP-11429,Open - with L1,P3,Live tracking / GPS incorrect,No,0,,15.78,0.66
+SUP-11430,Open - with L1,P2,Billing / invoice discrepancy,No,0,,15.43,0.64
+SUP-11433,Open - with L1,P2,Cab delay / no-show complaint,Yes,1,Fixed,11.08,0.46
+SUP-11435,Open - with Engineering,P4,Live tracking / GPS incorrect,Yes,2,Insufficient info - returned to L1,9.72,0.4
+SUP-11436,Open - with L1,P2,Roster / booking not syncing,No,0,,8.65,0.36
+SUP-11437,Open - with L1,P4,Live tracking / GPS incorrect,No,0,,6.9,0.29
+SUP-11438,Open - with L1,P4,Roster / booking not syncing,Yes,1,Fixed,6.0,0.25
+SUP-11439,Open - with L1,P4,Driver / vehicle compliance docs,No,0,,5.57,0.23
+SUP-11440,Open - with L1,P3,Roster / booking not syncing,Yes,1,Fixed,4.4,0.18
+SUP-11441,Open - with L1,P4,Login / access issue,Yes,1,Not a bug - how-to,4.1,0.17
+SUP-11442,Open - with L1,P3,Report export failing,No,0,,3.35,0.14
+SUP-11443,Open - with L1,P3,Employee address / geocode change,No,0,,3.32,0.14
+SUP-11444,Open - with L1,P4,Employee address / geocode change,No,0,,0.12,0.0
