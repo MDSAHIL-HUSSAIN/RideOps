@@ -1,4 +1,3 @@
-import type { Request, Response } from "express";
 import { z } from "zod";
 import { deterministicAnalysis } from "../shared/support/support-analysis-engine";
 
@@ -88,19 +87,30 @@ function outputText(payload: unknown) {
   );
 }
 
-export default async function copilot(req: Request, res: Response) {
-  if (req.method !== "POST")
-    return res.status(405).json({ error: "Method not allowed" });
-  const parsed = inputSchema.safeParse(req.body);
+async function handleCopilot(request: Request) {
+  if (request.method !== "POST")
+    return Response.json({ error: "Method not allowed" }, { status: 405 });
+
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const parsed = inputSchema.safeParse(body);
   if (!parsed.success)
-    return res.status(400).json({
-      error: "Invalid copilot request",
-      detail: parsed.error.flatten(),
-    });
+    return Response.json(
+      {
+        error: "Invalid copilot request",
+        detail: parsed.error.flatten(),
+      },
+      { status: 400 },
+    );
   const fallback = deterministicAnalysis(parsed.data);
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey)
-    return res.json({
+    return Response.json({
       ...fallback,
       providerStatus:
         "Model credential not configured; deterministic evidence engine used.",
@@ -157,7 +167,7 @@ export default async function copilot(req: Request, res: Response) {
           (existing) => existing.field.toLowerCase() === g.field.toLowerCase(),
         ),
     );
-    return res.json({
+    return Response.json({
       ...fallback,
       mode: "gemini",
       extracted: { ...fallback.extracted, ...(modelResult.extracted ?? {}) },
@@ -167,7 +177,7 @@ export default async function copilot(req: Request, res: Response) {
       providerStatus: `Enhanced by ${model}; deterministic guardrails retained.`,
     });
   } catch (error) {
-    return res.json({
+    return Response.json({
       ...fallback,
       providerStatus: `Model enhancement unavailable; deterministic engine used safely. ${error instanceof Error ? error.message : "Unknown error"}`,
     });
@@ -175,3 +185,5 @@ export default async function copilot(req: Request, res: Response) {
     clearTimeout(timeout);
   }
 }
+
+export default { fetch: handleCopilot };

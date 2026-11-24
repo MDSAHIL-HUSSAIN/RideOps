@@ -1,4 +1,3 @@
-import type { Request, Response } from "express";
 import { z } from "zod";
 import { knownIssueSeeds } from "../shared/support/support-analysis-engine";
 
@@ -11,16 +10,27 @@ const issueSchema = z.object({
   workaround: z.string(),
 });
 
-export default function knownIssues(req: Request, res: Response) {
-  if (req.method === "GET") return res.json({ items: knownIssueSeeds });
-  if (req.method !== "POST")
-    return res.status(405).json({ error: "Method not allowed" });
-  const parsed = issueSchema.safeParse(req.body);
+async function handleKnownIssues(request: Request) {
+  if (request.method === "GET")
+    return Response.json({ items: knownIssueSeeds });
+  if (request.method !== "POST")
+    return Response.json({ error: "Method not allowed" }, { status: 405 });
+
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const parsed = issueSchema.safeParse(body);
   if (!parsed.success)
-    return res.status(400).json({ error: "Invalid known issue" });
+    return Response.json({ error: "Invalid known issue" }, { status: 400 });
   const item = {
     id: `KI-${Math.floor(300 + Math.random() * 699)}`,
     ...parsed.data,
   };
-  return res.json({ ok: true, item });
+  return Response.json({ ok: true, item });
 }
+
+export default { fetch: handleKnownIssues };

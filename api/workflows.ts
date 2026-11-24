@@ -1,4 +1,3 @@
-import type { Request, Response } from "express";
 import { z } from "zod";
 
 const payload = z.object({
@@ -24,14 +23,25 @@ const payload = z.object({
     .optional(),
 });
 
-export default function workflows(req: Request, res: Response) {
-  if (req.method === "GET") return res.json({ items: [] });
-  if (req.method !== "POST")
-    return res.status(405).json({ error: "Method not allowed" });
-  const parsed = payload.safeParse(req.body);
+async function handleWorkflows(request: Request) {
+  if (request.method === "GET") return Response.json({ items: [] });
+  if (request.method !== "POST")
+    return Response.json({ error: "Method not allowed" }, { status: 405 });
+
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const parsed = payload.safeParse(body);
   if (!parsed.success)
-    return res
-      .status(400)
-      .json({ error: "Invalid workflow", detail: parsed.error.flatten() });
-  return res.json({ ok: true, updatedAt: new Date().toISOString() });
+    return Response.json(
+      { error: "Invalid workflow", detail: parsed.error.flatten() },
+      { status: 400 },
+    );
+  return Response.json({ ok: true, updatedAt: new Date().toISOString() });
 }
+
+export default { fetch: handleWorkflows };
