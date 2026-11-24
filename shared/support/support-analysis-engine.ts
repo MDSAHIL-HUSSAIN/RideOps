@@ -1,5 +1,5 @@
-import { historicalTickets } from "./historical-ticket-data";
-import type { CopilotResult, SimilarCase, Ticket } from "./support-types";
+import { historicalTickets } from "./historical-ticket-data.js";
+import type { CopilotResult, SimilarCase, Ticket } from "./support-types.js";
 
 export const knownIssueSeeds = [
   {

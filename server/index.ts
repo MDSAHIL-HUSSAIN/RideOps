@@ -3,9 +3,9 @@ import { config } from "dotenv";
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import copilot from "../api/copilot";
-import knownIssues from "../api/known-issues";
-import workflows from "../api/workflows";
+import copilot from "../api/copilot.js";
+import knownIssues from "../api/known-issues.js";
+import workflows from "../api/workflows.js";
 
 config({ path: ".env.local", override: true });
 

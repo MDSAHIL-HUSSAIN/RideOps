@@ -7,8 +7,17 @@ import type {
 } from "../domain/workspace";
 
 async function readJson<T>(response: Response): Promise<T> {
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.error || "Request failed");
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/json")) {
+    await response.text();
+    throw new Error(
+      `RideOps service is unavailable (${response.status}). Please retry after the deployment finishes.`,
+    );
+  }
+
+  const data = (await response.json()) as T & { error?: string };
+  if (!response.ok)
+    throw new Error(data.error || `Request failed (${response.status})`);
   return data;
 }
 

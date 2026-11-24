@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { knownIssueSeeds } from "../shared/support/support-analysis-engine";
+import { knownIssueSeeds } from "../shared/support/support-analysis-engine.js";
 
 const issueSchema = z.object({
   title: z.string().min(4),

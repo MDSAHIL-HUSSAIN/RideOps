@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { deterministicAnalysis } from "../shared/support/support-analysis-engine";
+import { deterministicAnalysis } from "../shared/support/support-analysis-engine.js";
 
 const inputSchema = z.object({
   ticket: z.object({
